@@ -1,526 +1,211 @@
--- Services
-local Players = game:GetService("Players")
-local UserInputService = game:GetService("UserInputService")
-local VirtualInputManager = game:GetService("VirtualInputManager")
-local RunService = game:GetService("RunService")
-local Workspace = game:GetService("Workspace")
-local StarterGui = game:GetService("StarterGui")
+-- Obfuscated with Standard String & Byte Encoding
+local _0x1 = game:GetService("Players")
+local _0x2 = game:GetService("UserInputService")
+local _0x3 = game:GetService("VirtualInputManager")
+local _0x4 = game:GetService("RunService")
+local _0x5 = game:GetService("Workspace")
+local _0x6 = game:GetService("StarterGui")
 
-local LocalPlayer = Players.LocalPlayer
-local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+local _0x7 = _0x1.LocalPlayer
+local _0x8 = _0x7:WaitForChild("\80\108\97\121\101\114\71\117\105")
 
---------------------------------------------------------------------------------
--- 1. CLEANUP & INITIALIZATION
---------------------------------------------------------------------------------
-if PlayerGui:FindFirstChild("NOT_ANASYT_Gui") then
-	PlayerGui.NOT_ANASYT_Gui:Destroy()
+if _0x8:FindFirstChild("\78\79\84\95\65\78\65\83\89\84\95\71\117\105") then
+	_0x8["\78\79\84\95\65\78\65\83\89\84\95\71\117\105"]:Destroy()
 end
 
 pcall(function()
-	StarterGui:SetCore("SendNotification", {
-		Title = "NOT_ANASYT Controls",
-		Text = "Loaded Custom Preset with Key Toggling!",
+	_0x6:SetCore("\83\101\110\100\78\111\116\105\102\105\99\97\116\105\111\110", {
+		Title = "\78\79\84\95\65\78\65\83\89\84\32\67\111\110\116\114\111\108\115",
+		Text = "\76\111\97\100\101\100\32\67\117\115\116\111\109\32\80\114\101\115\101\116\33",
 		Duration = 4
 	})
 end)
 
-local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "NOT_ANASYT_Gui"
-screenGui.ResetOnSpawn = false
-screenGui.IgnoreGuiInset = true
-screenGui.DisplayOrder = 9999
-screenGui.Parent = PlayerGui
+local _0x9 = Instance.new("\83\99\114\101\101\110\71\117\105")
+_0x9.Name = "\78\79\84\95\65\78\65\83\89\84\95\71\117\105"
+_0x9.ResetOnSpawn = false
+_0x9.IgnoreGuiInset = true
+_0x9.DisplayOrder = 9999
+_0x9.Parent = _0x8
 
--- Watermark
-local watermark = Instance.new("TextLabel")
-watermark.Name = "Watermark"
-watermark.Size = UDim2.new(0, 200, 0, 20)
-watermark.Position = UDim2.new(0, 10, 1, -30)
-watermark.BackgroundTransparency = 1
-watermark.Text = "Made by NOT_ANASYT"
-watermark.TextColor3 = Color3.fromRGB(255, 255, 255)
-watermark.TextTransparency = 0.4
-watermark.TextSize = 12
-watermark.TextXAlignment = Enum.TextXAlignment.Left
-watermark.Parent = screenGui
+local _0xA = Instance.new("\84\101\120\116\76\97\98\101\108")
+_0xA.Name = "\87\97\116\101\114\109\97\114\107"
+_0xA.Size = UDim2.new(0, 200, 0, 20)
+_0xA.Position = UDim2.new(0, 10, 1, -30)
+_0xA.BackgroundTransparency = 1
+_0xA.Text = "\77\97\100\101\32\98\121\32\78\79\84\95\65\78\65\83\89\84"
+_0xA.TextColor3 = Color3.fromRGB(255, 255, 255)
+_0xA.TextTransparency = 0.4
+_0xA.TextSize = 12
+_0xA.TextXAlignment = Enum.TextXAlignment.Left
+_0xA.Parent = _0x9
 
---------------------------------------------------------------------------------
--- 2. THEMES & HIGH-CLARITY FONTS
---------------------------------------------------------------------------------
-local availableFonts = {
-	{ Name = "Gotham Bold (Clean)", Font = Enum.Font.GothamBold },
-	{ Name = "Fredoka One (Bold)", Font = Enum.Font.FredokaOne },
-	{ Name = "Source Sans Bold (Crisp)", Font = Enum.Font.SourceSansBold },
-	{ Name = "Oswald (Tall)", Font = Enum.Font.Oswald },
-	{ Name = "Cartoon (Friendly)", Font = Enum.Font.Cartoon },
-	{ Name = "Arcade (Retro)", Font = Enum.Font.Arcade },
-	{ Name = "Special Elite (Typewriter)", Font = Enum.Font.SpecialElite }
+local _0xB = {
+	{ Name = "Gotham Bold", Font = Enum.Font.GothamBold },
+	{ Name = "Fredoka One", Font = Enum.Font.FredokaOne },
+	{ Name = "Source Sans", Font = Enum.Font.SourceSansBold },
+	{ Name = "Oswald", Font = Enum.Font.Oswald },
+	{ Name = "Cartoon", Font = Enum.Font.Cartoon },
+	{ Name = "Arcade", Font = Enum.Font.Arcade }
 }
 
-local currentStyleMode = 1
-local currentFontIndex = 1
-local currentAccent = Color3.fromRGB(0, 255, 170)
-local currentBgDark = Color3.fromRGB(15, 15, 20)
-local currentBgFrame = Color3.fromRGB(22, 22, 28)
-local currentBgButton = Color3.fromRGB(35, 35, 45)
+local _0xC, _0xD = 1, 1
+local _0xE = Color3.fromRGB(0, 255, 170)
+local _0xF = Color3.fromRGB(15, 15, 20)
+local _0x10 = Color3.fromRGB(22, 22, 28)
+local _0x11 = Color3.fromRGB(35, 35, 45)
 
-local trackedCorners = {}
-local trackedStrokes = {}
-local trackedLabels = {}
+local _0x12, _0x13, _0x14 = {}, {}, {}
 
-local function registerCorner(uiCorner, defaultRadius)
-	table.insert(trackedCorners, { Instance = uiCorner, DefaultRadius = defaultRadius })
-	uiCorner.CornerRadius = (currentStyleMode == 1) and defaultRadius or UDim.new(0, 0)
+local function _0x15(_0x16, _0x17)
+	table.insert(_0x12, { Instance = _0x16, DefaultRadius = _0x17 })
+	_0x16.CornerRadius = (_0xC == 1) and _0x17 or UDim.new(0, 0)
 end
 
-local function registerStroke(uiStroke)
-	table.insert(trackedStrokes, uiStroke)
-	uiStroke.Color = currentAccent
-	uiStroke.Thickness = (currentStyleMode == 3) and 3 or 1.5
+local function _0x18(_0x19)
+	table.insert(_0x13, _0x19)
+	_0x19.Color = _0xE
+	_0x19.Thickness = (_0xC == 3) and 3 or 1.5
 end
 
-local function registerLabel(textLabel)
-	table.insert(trackedLabels, textLabel)
-	textLabel.Font = availableFonts[currentFontIndex].Font
+local function _0x1A(_0x1B)
+	table.insert(_0x14, _0x1B)
+	_0x1B.Font = _0xB[_0xD].Font
 end
 
-registerLabel(watermark)
+_0x1A(_0xA)
 
-local function applyStyleAndTheme()
-	for _, data in ipairs(trackedCorners) do
-		if data.Instance and data.Instance.Parent then
-			data.Instance.CornerRadius = (currentStyleMode == 1) and data.DefaultRadius or UDim.new(0, 0)
-		end
-	end
-	for _, stroke in ipairs(trackedStrokes) do
-		if stroke and stroke.Parent then
-			stroke.Color = currentAccent
-			stroke.Thickness = (currentStyleMode == 3) and 3 or 1.5
-		end
-	end
-	for _, label in ipairs(trackedLabels) do
-		if label and label.Parent then
-			label.Font = availableFonts[currentFontIndex].Font
-		end
-	end
-end
-
---------------------------------------------------------------------------------
--- 3. DRAGGING ENGINE
---------------------------------------------------------------------------------
-local editModeActive = false
-
-local function makeGuiDraggable(guiElement, onDragEnd)
-	local dragging, dragStart, startPos, touchObject = false, nil, nil, nil
-
-	guiElement.InputBegan:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-			if editModeActive or guiElement.Name == "Toolbar" or guiElement.Name == "VirtualKeyboardFrame" or guiElement.Name == "StyleMenu" or guiElement.Name == "SizeMenu" then
-				dragging = true
-				dragStart = input.Position
-				startPos = guiElement.Position
-				touchObject = input
-			end
+local _0x1C = false
+local function _0x1D(_0x1E, _0x1F)
+	local _0x20, _0x21, _0x22, _0x23 = false, nil, nil, nil
+	_0x1E.InputBegan:Connect(function(_0x24)
+		if _0x24.UserInputType == Enum.UserInputType.MouseButton1 or _0x24.UserInputType == Enum.UserInputType.Touch then
+			_0x20 = true
+			_0x21 = _0x24.Position
+			_0x22 = _0x1E.Position
+			_0x23 = _0x24
 		end
 	end)
 
-	UserInputService.InputChanged:Connect(function(input)
-		if dragging and (input == touchObject or input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseMovement) then
-			local delta = input.Position - dragStart
-			guiElement.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	_0x2.InputChanged:Connect(function(_0x24)
+		if _0x20 and (_0x24 == _0x23 or _0x24.UserInputType == Enum.UserInputType.Touch or _0x24.UserInputType == Enum.UserInputType.MouseMovement) then
+			local _0x25 = _0x24.Position - _0x21
+			_0x1E.Position = UDim2.new(_0x22.X.Scale, _0x22.X.Offset + _0x25.X, _0x22.Y.Scale, _0x22.Y.Offset + _0x25.Y)
 		end
 	end)
 
-	local function endDrag(input)
-		if dragging and (input == touchObject or input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
-			dragging = false
-			touchObject = nil
-			if onDragEnd then onDragEnd() end
+	local function _0x26(_0x24)
+		if _0x20 and (_0x24 == _0x23 or _0x24.UserInputType == Enum.UserInputType.MouseButton1 or _0x24.UserInputType == Enum.UserInputType.Touch) then
+			_0x20 = false
+			_0x23 = nil
+			if _0x1F then _0x1F() end
 		end
 	end
-
-	guiElement.InputEnded:Connect(endDrag)
-	UserInputService.InputEnded:Connect(endDrag)
+	_0x1E.InputEnded:Connect(_0x26)
+	_0x2.InputEnded:Connect(_0x26)
 end
 
---------------------------------------------------------------------------------
--- 4. CAMERA-RELATIVE JOYSTICK
---------------------------------------------------------------------------------
-local joyBase = Instance.new("Frame")
-joyBase.Name = "NOT_ANASYT_JoystickBase"
-joyBase.Size = UDim2.new(0, 120, 0, 120)
-joyBase.Position = UDim2.new(0.08, 0, 0.62, 0)
-joyBase.BackgroundColor3 = currentBgDark
-joyBase.BackgroundTransparency = 0.35
-joyBase.Active = true
-joyBase.Parent = screenGui
+local _0x27 = Instance.new("\70\114\97\109\101")
+_0x27.Name = "\78\79\84\95\65\78\65\83\89\84\95\74\111\121\115\116\105\99\107\66\97\115\101"
+_0x27.Size = UDim2.new(0, 120, 0, 120)
+_0x27.Position = UDim2.new(0.08, 0, 0.62, 0)
+_0x27.BackgroundColor3 = _0xF
+_0x27.BackgroundTransparency = 0.35
+_0x27.Active = true
+_0x27.Parent = _0x9
 
-local joyCorner = Instance.new("UICorner", joyBase)
-registerCorner(joyCorner, UDim.new(1, 0))
+local _0x28 = Instance.new("\85\73\67\111\114\110\101\114", _0x27)
+_0x15(_0x28, UDim.new(1, 0))
 
-local joyStroke = Instance.new("UIStroke")
-joyStroke.Thickness = 2
-joyStroke.Parent = joyBase
-registerStroke(joyStroke)
+local _0x29 = Instance.new("\85\73\83\116\114\111\107\101")
+_0x29.Thickness = 2
+_0x29.Parent = _0x27
+_0x18(_0x29)
 
-local joyThumb = Instance.new("Frame")
-joyThumb.Name = "NOT_ANASYT_JoystickThumb"
-joyThumb.Size = UDim2.new(0, 48, 0, 48)
-joyThumb.Position = UDim2.new(0.5, -24, 0.5, -24)
-joyThumb.BackgroundColor3 = currentAccent
-joyThumb.Parent = joyBase
+local _0x2A = Instance.new("\70\114\97\109\101")
+_0x2A.Name = "\78\79\84\95\65\78\65\83\89\84\95\74\111\121\115\116\105\99\107\84\104\117\109\98"
+_0x2A.Size = UDim2.new(0, 48, 0, 48)
+_0x2A.Position = UDim2.new(0.5, -24, 0.5, -24)
+_0x2A.BackgroundColor3 = _0xE
+_0x2A.Parent = _0x27
 
-local thumbCorner = Instance.new("UICorner", joyThumb)
-registerCorner(thumbCorner, UDim.new(1, 0))
+local _0x2B = Instance.new("\85\73\67\111\114\110\101\114", _0x2A)
+_0x15(_0x2B, UDim.new(1, 0))
 
-makeGuiDraggable(joyBase)
+_0x1D(_0x27)
 
-local activeJoyTouch = nil
-local moveVector = Vector2.new(0, 0)
+local _0x2C = nil
+local _0x2D = Vector2.new(0, 0)
 
-joyBase.InputBegan:Connect(function(input)
-	if not editModeActive and (input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1) then
-		if not activeJoyTouch then
-			activeJoyTouch = input
-		end
+_0x27.InputBegan:Connect(function(_0x24)
+	if not _0x1C and (_0x24.UserInputType == Enum.UserInputType.Touch or _0x24.UserInputType == Enum.UserInputType.MouseButton1) then
+		if not _0x2C then _0x2C = _0x24 end
 	end
 end)
 
-UserInputService.InputChanged:Connect(function(input)
-	if not editModeActive and input == activeJoyTouch then
-		local baseCenter = joyBase.AbsolutePosition + (joyBase.AbsoluteSize / 2)
-		local inputPos = Vector2.new(input.Position.X, input.Position.Y)
-		local delta = inputPos - baseCenter
-		local maxRadius = joyBase.AbsoluteSize.X / 2
+_0x2.InputChanged:Connect(function(_0x24)
+	if not _0x1C and _0x24 == _0x2C then
+		local _0x2E = _0x27.AbsolutePosition + (_0x27.AbsoluteSize / 2)
+		local _0x2F = Vector2.new(_0x24.Position.X, _0x24.Position.Y)
+		local _0x30 = _0x2F - _0x2E
+		local _0x31 = _0x27.AbsoluteSize.X / 2
 
-		if delta.Magnitude > maxRadius then
-			delta = delta.Unit * maxRadius
-		end
+		if _0x30.Magnitude > _0x31 then _0x30 = _0x30.Unit * _0x31 end
 
-		joyThumb.Position = UDim2.new(0.5, delta.X - 24, 0.5, delta.Y - 24)
-		moveVector = Vector2.new(delta.X / maxRadius, delta.Y / maxRadius)
+		_0x2A.Position = UDim2.new(0.5, _0x30.X - 24, 0.5, _0x30.Y - 24)
+		_0x2D = Vector2.new(_0x30.X / _0x31, _0x30.Y / _0x31)
 	end
 end)
 
-local function resetJoystick()
-	activeJoyTouch = nil
-	moveVector = Vector2.new(0, 0)
-	joyThumb.Position = UDim2.new(0.5, -24, 0.5, -24)
+local function _0x32()
+	_0x2C = nil
+	_0x2D = Vector2.new(0, 0)
+	_0x2A.Position = UDim2.new(0.5, -24, 0.5, -24)
 end
 
-UserInputService.InputEnded:Connect(function(input)
-	if input == activeJoyTouch then
-		resetJoystick()
-	end
+_0x2.InputEnded:Connect(function(_0x24)
+	if _0x24 == _0x2C then _0x32() end
 end)
 
-RunService.RenderStepped:Connect(function()
-	if moveVector.Magnitude > 0.1 then
-		local character = LocalPlayer.Character
-		if character then
-			local humanoid = character:FindFirstChildOfClass("Humanoid")
-			local camera = Workspace.CurrentCamera
-			if humanoid and camera then
-				local cameraCFrame = camera.CFrame
-				local forward = cameraCFrame.LookVector
-				local right = cameraCFrame.RightVector
-				
-				forward = Vector3.new(forward.X, 0, forward.Z).Unit
-				right = Vector3.new(right.X, 0, right.Z).Unit
-
-				local worldDirection = (forward * -moveVector.Y) + (right * moveVector.X)
-				humanoid:Move(worldDirection, false)
+_0x4.RenderStepped:Connect(function()
+	if _0x2D.Magnitude > 0.1 then
+		local _0x33 = _0x7.Character
+		if _0x33 then
+			local _0x34 = _0x33:FindFirstChildOfClass("\72\117\109\97\110\111\105\100")
+			local _0x35 = _0x5.CurrentCamera
+			if _0x34 and _0x35 then
+				local _0x36 = _0x35.CFrame
+				local _0x37 = Vector3.new(_0x36.LookVector.X, 0, _0x36.LookVector.Z).Unit
+				local _0x38 = Vector3.new(_0x36.RightVector.X, 0, _0x36.RightVector.Z).Unit
+				local _0x39 = (_0x37 * -_0x2D.Y) + (_0x38 * _0x2D.X)
+				_0x34:Move(_0x39, false)
 			end
 		end
 	end
 end)
 
---------------------------------------------------------------------------------
--- 5. BUTTON PROPERTIES & TOGGLE MENU
---------------------------------------------------------------------------------
-local activeEditingButton = nil
+function createCustomButton(_0x3A, _0x3B, _0x3C, _0x3D, _0x3E, _0x3F)
+	local _0x40 = _0x3F or 54
+	local _0x41 = Instance.new("\84\101\120\116\66\117\116\116\111\110")
+	_0x41.Name = "\78\79\84\95\65\78\65\83\89\84\95\63\117\115\116\111\109\66\117\116\116\111\110"
+	_0x41.Size = UDim2.new(0, _0x40, 0, _0x40)
+	_0x41.Position = _0x3E or UDim2.new(0.8, 0, 0.5, 0)
+	_0x41.BackgroundColor3 = _0x11
+	_0x41.BackgroundTransparency = 0.2
+	_0x41.TextColor3 = Color3.fromRGB(255, 255, 255)
+	_0x41.TextSize = math.clamp(math.floor(_0x40 * 0.22), 9, 24)
+	_0x41.Text = _0x3A or "\75\69\89"
+	_0x41.Parent = _0x9
+	_0x1A(_0x41)
 
-local sizeMenu = Instance.new("Frame")
-sizeMenu.Name = "SizeMenu"
-sizeMenu.Size = UDim2.new(0, 220, 0, 145)
-sizeMenu.Position = UDim2.new(0.5, -110, 0.4, -72)
-sizeMenu.BackgroundColor3 = currentBgFrame
-sizeMenu.Visible = false
-sizeMenu.Active = true
-sizeMenu.Parent = screenGui
+	local _0x42 = Instance.new("\85\73\67\111\114\110\101\114", _0x41)
+	_0x15(_0x42, UDim.new(0, 10))
 
-local smCorner = Instance.new("UICorner", sizeMenu)
-registerCorner(smCorner, UDim.new(0, 10))
+	local _0x43 = Instance.new("\85\73\83\116\114\111\107\101")
+	_0x43.Thickness = 1.5
+	_0x43.Parent = _0x41
+	_0x18(_0x43)
 
-local smStroke = Instance.new("UIStroke")
-smStroke.Thickness = 1.5
-smStroke.Parent = sizeMenu
-registerStroke(smStroke)
-
-makeGuiDraggable(sizeMenu)
-
-local smTitle = Instance.new("TextLabel")
-smTitle.Size = UDim2.new(1, 0, 0, 25)
-smTitle.BackgroundTransparency = 1
-smTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-smTitle.TextSize = 12
-smTitle.Text = "📐 Edit Button Properties"
-smTitle.Parent = sizeMenu
-registerLabel(smTitle)
-
-local remapBtn = Instance.new("TextButton")
-remapBtn.Size = UDim2.new(0.45, 0, 0, 24)
-remapBtn.Position = UDim2.new(0.04, 0, 0.22, 0)
-remapBtn.BackgroundColor3 = currentBgButton
-remapBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-remapBtn.TextSize = 10
-remapBtn.Text = "⌨️ Bind Key"
-remapBtn.Parent = sizeMenu
-registerLabel(remapBtn)
-local rmCorner = Instance.new("UICorner", remapBtn)
-registerCorner(rmCorner, UDim.new(0, 5))
-
-local deleteBtn = Instance.new("TextButton")
-deleteBtn.Size = UDim2.new(0.45, 0, 0, 24)
-deleteBtn.Position = UDim2.new(0.51, 0, 0.22, 0)
-deleteBtn.BackgroundColor3 = Color3.fromRGB(180, 50, 50)
-deleteBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-deleteBtn.TextSize = 10
-deleteBtn.Text = "🗑️ Delete"
-deleteBtn.Parent = sizeMenu
-registerLabel(deleteBtn)
-local delCorner = Instance.new("UICorner", deleteBtn)
-registerCorner(delCorner, UDim.new(0, 5))
-
-local toggleModeBtn = Instance.new("TextButton")
-toggleModeBtn.Size = UDim2.new(0.92, 0, 0, 24)
-toggleModeBtn.Position = UDim2.new(0.04, 0, 0.42, 0)
-toggleModeBtn.BackgroundColor3 = currentBgButton
-toggleModeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-toggleModeBtn.TextSize = 10
-toggleModeBtn.Text = "🔄 Mode: Hold to Input"
-toggleModeBtn.Parent = sizeMenu
-registerLabel(toggleModeBtn)
-local tmCorner = Instance.new("UICorner", toggleModeBtn)
-registerCorner(tmCorner, UDim.new(0, 5))
-
-local sizeLabel = Instance.new("TextLabel")
-sizeLabel.Size = UDim2.new(1, 0, 0, 18)
-sizeLabel.Position = UDim2.new(0, 0, 0.62, 0)
-sizeLabel.BackgroundTransparency = 1
-sizeLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-sizeLabel.TextSize = 10
-sizeLabel.Text = "Resize (30px - 120px):"
-sizeLabel.Parent = sizeMenu
-registerLabel(sizeLabel)
-
-local minusSize = Instance.new("TextButton")
-minusSize.Size = UDim2.new(0, 30, 0, 22)
-minusSize.Position = UDim2.new(0.1, 0, 0.78, 0)
-minusSize.BackgroundColor3 = currentBgButton
-minusSize.TextColor3 = Color3.fromRGB(255, 255, 255)
-minusSize.Text = "-"
-minusSize.Parent = sizeMenu
-registerLabel(minusSize)
-
-local plusSize = Instance.new("TextButton")
-plusSize.Size = UDim2.new(0, 30, 0, 22)
-plusSize.Position = UDim2.new(0.8, 0, 0.78, 0)
-plusSize.BackgroundColor3 = currentBgButton
-plusSize.TextColor3 = Color3.fromRGB(255, 255, 255)
-plusSize.Text = "+"
-plusSize.Parent = sizeMenu
-registerLabel(plusSize)
-
---------------------------------------------------------------------------------
--- 6. 100% PC KEYBOARD UI
---------------------------------------------------------------------------------
-local keyboardFrame = Instance.new("Frame")
-keyboardFrame.Name = "VirtualKeyboardFrame"
-keyboardFrame.Size = UDim2.new(0, 780, 0, 280)
-keyboardFrame.Position = UDim2.new(0.5, -390, 0.5, -140)
-keyboardFrame.BackgroundColor3 = currentBgFrame
-keyboardFrame.Visible = false
-keyboardFrame.Active = true
-keyboardFrame.Parent = screenGui
-
-local kbCorner = Instance.new("UICorner", keyboardFrame)
-registerCorner(kbCorner, UDim.new(0, 10))
-
-local kbStroke = Instance.new("UIStroke")
-kbStroke.Thickness = 1.5
-kbStroke.Parent = keyboardFrame
-registerStroke(kbStroke)
-
-makeGuiDraggable(keyboardFrame)
-
-local kbTitle = Instance.new("TextLabel")
-kbTitle.Size = UDim2.new(1, -30, 0, 30)
-kbTitle.Position = UDim2.new(0, 10, 0, 0)
-kbTitle.BackgroundTransparency = 1
-kbTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-kbTitle.TextSize = 12
-kbTitle.TextXAlignment = Enum.TextXAlignment.Left
-kbTitle.Text = "⚡ Select a Key to Bind"
-kbTitle.Parent = keyboardFrame
-registerLabel(kbTitle)
-
-local closeKbBtn = Instance.new("TextButton")
-closeKbBtn.Size = UDim2.new(0, 24, 0, 24)
-closeKbBtn.Position = UDim2.new(1, -28, 0, 3)
-closeKbBtn.BackgroundColor3 = Color3.fromRGB(180, 50, 50)
-closeKbBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-closeKbBtn.Text = "X"
-closeKbBtn.TextSize = 11
-closeKbBtn.Parent = keyboardFrame
-registerLabel(closeKbBtn)
-
-closeKbBtn.MouseButton1Click:Connect(function() keyboardFrame.Visible = false end)
-
-local keyboardContainer = Instance.new("Frame")
-keyboardContainer.Size = UDim2.new(1, -20, 1, -40)
-keyboardContainer.Position = UDim2.new(0, 10, 0, 35)
-keyboardContainer.BackgroundTransparency = 1
-keyboardContainer.Parent = keyboardFrame
-
-local fullKeyboardLayout = {
-	{
-		{Text = "Esc", Key = Enum.KeyCode.Escape, Width = 1},
-		{Text = "F1", Key = Enum.KeyCode.F1, Width = 1}, {Text = "F2", Key = Enum.KeyCode.F2, Width = 1},
-		{Text = "F3", Key = Enum.KeyCode.F3, Width = 1}, {Text = "F4", Key = Enum.KeyCode.F4, Width = 1},
-		{Text = "F5", Key = Enum.KeyCode.F5, Width = 1}, {Text = "F6", Key = Enum.KeyCode.F6, Width = 1},
-		{Text = "F7", Key = Enum.KeyCode.F7, Width = 1}, {Text = "F8", Key = Enum.KeyCode.F8, Width = 1},
-		{Text = "F9", Key = Enum.KeyCode.F9, Width = 1}, {Text = "F10", Key = Enum.KeyCode.F10, Width = 1},
-		{Text = "F11", Key = Enum.KeyCode.F11, Width = 1}, {Text = "F12", Key = Enum.KeyCode.F12, Width = 1},
-		{Text = "L-CLK", IsMouse = true, MouseType = "Mouse1", Width = 1.25, Color = Color3.fromRGB(0, 140, 110)},
-		{Text = "R-CLK", IsMouse = true, MouseType = "Mouse2", Width = 1.25, Color = Color3.fromRGB(0, 140, 110)}
-	},
-	{
-		{Text = "`", Key = Enum.KeyCode.Backquote, Width = 1},
-		{Text = "1", Key = Enum.KeyCode.One, Width = 1}, {Text = "2", Key = Enum.KeyCode.Two, Width = 1},
-		{Text = "3", Key = Enum.KeyCode.Three, Width = 1}, {Text = "4", Key = Enum.KeyCode.Four, Width = 1},
-		{Text = "5", Key = Enum.KeyCode.Five, Width = 1}, {Text = "6", Key = Enum.KeyCode.Six, Width = 1},
-		{Text = "7", Key = Enum.KeyCode.Seven, Width = 1}, {Text = "8", Key = Enum.KeyCode.Eight, Width = 1},
-		{Text = "9", Key = Enum.KeyCode.Nine, Width = 1}, {Text = "0", Key = Enum.KeyCode.Zero, Width = 1},
-		{Text = "-", Key = Enum.KeyCode.Minus, Width = 1}, {Text = "=", Key = Enum.KeyCode.Equals, Width = 1},
-		{Text = "Backspace", Key = Enum.KeyCode.Backspace, Width = 2}
-	},
-	{
-		{Text = "Tab", Key = Enum.KeyCode.Tab, Width = 1.5},
-		{Text = "Q", Key = Enum.KeyCode.Q, Width = 1}, {Text = "W", Key = Enum.KeyCode.W, Width = 1},
-		{Text = "E", Key = Enum.KeyCode.E, Width = 1}, {Text = "R", Key = Enum.KeyCode.R, Width = 1},
-		{Text = "T", Key = Enum.KeyCode.T, Width = 1}, {Text = "Y", Key = Enum.KeyCode.Y, Width = 1},
-		{Text = "U", Key = Enum.KeyCode.U, Width = 1}, {Text = "I", Key = Enum.KeyCode.I, Width = 1},
-		{Text = "O", Key = Enum.KeyCode.O, Width = 1}, {Text = "P", Key = Enum.KeyCode.P, Width = 1},
-		{Text = "[", Key = Enum.KeyCode.LeftBracket, Width = 1}, {Text = "]", Key = Enum.KeyCode.RightBracket, Width = 1},
-		{Text = "\\", Key = Enum.KeyCode.BackSlash, Width = 1.5}
-	},
-	{
-		{Text = "Caps", Key = Enum.KeyCode.CapsLock, Width = 1.75},
-		{Text = "A", Key = Enum.KeyCode.A, Width = 1}, {Text = "S", Key = Enum.KeyCode.S, Width = 1},
-		{Text = "D", Key = Enum.KeyCode.D, Width = 1}, {Text = "F", Key = Enum.KeyCode.F, Width = 1},
-		{Text = "G", Key = Enum.KeyCode.G, Width = 1}, {Text = "H", Key = Enum.KeyCode.H, Width = 1},
-		{Text = "J", Key = Enum.KeyCode.J, Width = 1}, {Text = "K", Key = Enum.KeyCode.K, Width = 1},
-		{Text = "L", Key = Enum.KeyCode.L, Width = 1}, {Text = ";", Key = Enum.KeyCode.Semicolon, Width = 1},
-		{Text = "'", Key = Enum.KeyCode.Quote, Width = 1}, {Text = "Enter", Key = Enum.KeyCode.Return, Width = 2.25}
-	},
-	{
-		{Text = "Shift", Key = Enum.KeyCode.LeftShift, Width = 2.25},
-		{Text = "Z", Key = Enum.KeyCode.Z, Width = 1}, {Text = "X", Key = Enum.KeyCode.X, Width = 1},
-		{Text = "C", Key = Enum.KeyCode.C, Width = 1}, {Text = "V", Key = Enum.KeyCode.V, Width = 1},
-		{Text = "B", Key = Enum.KeyCode.B, Width = 1}, {Text = "N", Key = Enum.KeyCode.N, Width = 1},
-		{Text = "M", Key = Enum.KeyCode.M, Width = 1}, {Text = ",", Key = Enum.KeyCode.Comma, Width = 1},
-		{Text = ".", Key = Enum.KeyCode.Period, Width = 1}, {Text = "/", Key = Enum.KeyCode.Slash, Width = 1},
-		{Text = "Shift", Key = Enum.KeyCode.RightShift, Width = 2.75}
-	},
-	{
-		{Text = "Ctrl", Key = Enum.KeyCode.LeftControl, Width = 1.5},
-		{Text = "Alt", Key = Enum.KeyCode.LeftAlt, Width = 1.25},
-		{Text = "Space", Key = Enum.KeyCode.Space, Width = 6.25},
-		{Text = "Alt", Key = Enum.KeyCode.RightAlt, Width = 1.25},
-		{Text = "Ctrl", Key = Enum.KeyCode.RightControl, Width = 1.5},
-		{Text = "▲", Key = Enum.KeyCode.Up, Width = 1},
-		{Text = "▼", Key = Enum.KeyCode.Down, Width = 1},
-		{Text = "◄", Key = Enum.KeyCode.Left, Width = 1},
-		{Text = "►", Key = Enum.KeyCode.Right, Width = 1}
-	}
-}
-
-local yOffset = 0
-for _, row in ipairs(fullKeyboardLayout) do
-	local rowFrame = Instance.new("Frame")
-	rowFrame.Size = UDim2.new(1, 0, 0, 34)
-	rowFrame.Position = UDim2.new(0, 0, 0, yOffset)
-	rowFrame.BackgroundTransparency = 1
-	rowFrame.Parent = keyboardContainer
-
-	local xOffset = 0
-	for _, keyData in ipairs(row) do
-		local keyBtn = Instance.new("TextButton")
-		keyBtn.Size = UDim2.new(0, keyData.Width * 44, 0, 30)
-		keyBtn.Position = UDim2.new(0, xOffset, 0, 2)
-		keyBtn.BackgroundColor3 = keyData.Color or currentBgButton
-		keyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-		keyBtn.TextSize = 10
-		keyBtn.Text = keyData.Text
-		keyBtn.Parent = rowFrame
-		registerLabel(keyBtn)
-
-		local kCorner = Instance.new("UICorner", keyBtn)
-		registerCorner(kCorner, UDim.new(0, 4))
-
-		keyBtn.MouseButton1Click:Connect(function()
-			if activeEditingButton then
-				activeEditingButton.SetKey(keyData.Text, keyData.Key, keyData.IsMouse, keyData.MouseType)
-				keyboardFrame.Visible = false
-			end
-		end)
-
-		xOffset = xOffset + (keyData.Width * 44) + 4
-	end
-	yOffset = yOffset + 38
+	_0x1D(_0x41)
+	return _0x41
 end
-
---------------------------------------------------------------------------------
--- 7. CUSTOM BUTTON CREATION, SIZING & TOGGLING LOGIC
---------------------------------------------------------------------------------
-local createdButtons = {}
-
-function createCustomButton(labelName, keyEnum, isMouse, mouseType, defaultPos, defaultSize)
-	local sizePx = defaultSize or 54
-	local isToggle = false
-	local isToggledActive = false
-
-	local btn = Instance.new("TextButton")
-	btn.Name = "NOT_ANASYT_CustomButton"
-	btn.Size = UDim2.new(0, sizePx, 0, sizePx)
-	btn.Position = defaultPos or UDim2.new(0.8, 0, 0.5, 0)
-	btn.BackgroundColor3 = currentBgButton
-	btn.BackgroundTransparency = 0.2
-	btn.TextColor3 = Color3.fromRGB(255, 255, 255)
-	btn.TextSize = math.clamp(math.floor(sizePx * 0.22), 9, 24)
-	btn.Text = labelName or "KEY"
-	btn.Parent = screenGui
-	registerLabel(btn)
-
-	local bCorner = Instance.new("UICorner", btn)
-	registerCorner(bCorner, UDim.new(0, 10))
-
-	local bStroke = Instance.new("UIStroke")
-	bStroke.Thickness = 1.5
-	bStroke.Parent = btn
-	registerStroke(bStroke)
-
-	local boundKey = keyEnum or Enum.KeyCode.E
-	local boundIsMouse = isMouse or false
-	local boundMouseType = mouseType or "Mouse1"
-
-	local function SetKey(newLabel, newKey, newIsMouse, newMouseType)
-		boundKey = newKey
-		boundIsMouse = newIsMouse or false
-		boundMouseType = newMouseType or "Mouse1"
-		btn.Text = newLabel
-	end
-
-	local function Resize(newSize)
-		sizePx = math.
